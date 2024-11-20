@@ -3,38 +3,38 @@
 
 
 type Circle = {
+    shape: "circle"
     radius: number;
 }
 
 type Rectangle = {
+    shape: "rectangle"
     height: number;
     width: number;
 }
 
-type ShapeUnion = Circle | Rectangle;
+type UnionShape = Circle | Rectangle;
 
 
-const calculateShapeArea = (shape: ShapeUnion) : number =>{
-    if('radius' in shape){
-        const circleArea = Math.PI * shape.radius * shape.radius;
+const calculateShapeArea = (unionShape: UnionShape) : number =>{
+    if(unionShape.shape === "circle"){
+        const circleArea = Math.PI * unionShape.radius * unionShape.radius;
         return parseFloat(circleArea.toFixed(2));
     }
     else{
-        const rectangleArea = shape.height * shape.width;
+        const rectangleArea = unionShape.height * unionShape.width;
         return parseFloat(rectangleArea.toFixed(2));
     }
 }
 
-const circle: Circle = {
-    radius: 50,
-}
 
-const rectangle: Rectangle  = {
-    height: 10,
-    width: 29,
-}
+const circleArea = calculateShapeArea({ shape: "circle", radius: 5 });
 
+const rectangleArea = calculateShapeArea({
+    shape: "rectangle",
+    width: 4,
+    height: 6,
+  });
 
-// Outputs 
-console.log(calculateShapeArea(circle));  
-console.log(calculateShapeArea(rectangle)); 
+console.log(circleArea);
+console.log(rectangleArea);
